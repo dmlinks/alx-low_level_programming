@@ -27,5 +27,5 @@ int _squ(int num, int root)
 	else if (num * num == root)
 		return (num);
 	else
-		return (_squ(num - 1, root));
+		return (_squ(num + 1, root));
 }
