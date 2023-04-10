@@ -5,7 +5,7 @@
  * @c: an inout integer
  * Return: 1 if c is uppercseand some are mystery
  */
-int _isupper(char *c)
+int _isupper(int c)
 {
 	char uppercase;
 	int isupper;
