@@ -27,15 +27,13 @@ int main(int argc, char *argv[])
 		exit(2);
 	}
 	ptr = (unsigned char *)main;
-
-	for (i = 0; i < bytes; i++)
+	i = 0;
+	if (bytes > 0)
 	{
-			printf("%02x", *(ptr + i));
-			if (i != bytes - 1)
-				printf(" ");
+		while (i < (bytes - 1))
+			printf("%02hhx ", ptr[i++]);
+		printf("%hhx\n", ptr[i]);
 	}
-
-	printf("\n");
 
 	return (0);
 }
