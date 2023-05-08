@@ -11,36 +11,19 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	FILE *fp;
-	ssize_t read_bytes;
+	ssize_t rite, red, fp;
 	char *temp;
 
-	if (!filename)
+	fp = open(filename, O_RDONLY);
+	if (fp == -1)
 		return (0);
 
-	fp = fopen(filename, "r");
-	if (!fp)
-		return (0);
+	temp = malloc(sizeof(char) *letters);
+	red = read(fp, temp, letters);
+	rite = write(STDOUT_FILENO, temp, red);
 
-	temp = malloc(sizeof(char) * letters);
-	if (!temp)
-	{
-		fclose(fp);
-		return (0);
-	}
-	read_bytes = fread(temp, sizeof(char), letters, fp);
-	fclose(fp);
-
-	if (!read_bytes)
-	{
-		free(temp);
-		return (0);
-	}
-	read_bytes = fwrite(temp, sizeof(char), read_bytes, stdout);
 	free(temp);
+	close(fp);
 
-	if (read_bytes < 0 || (size_t)read_bytes < letters)
-		return (0);
-
-	return (read_bytes);
+	return (rite);
 }
