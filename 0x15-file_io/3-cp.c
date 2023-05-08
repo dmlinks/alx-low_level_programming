@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 char *create_buffer(char *file);
 void close_file(int fd);
@@ -17,8 +19,7 @@ char *create_buffer(char *file)
 
 	if (buffer == NULL)
 	{
-		dprintf(STDERR_FILENO,
-			"Error: Can't write to %s\n", file);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
 		exit(99);
 	}
 
@@ -79,7 +80,7 @@ int main(int argc, char *argv[])
 			exit(98);
 		}
 
-		wte = write(to, buffer, r);
+		wte = write(to, buffer, red);
 		if (to == -1 || wte == -1)
 		{
 			dprintf(STDERR_FILENO,
@@ -91,7 +92,7 @@ int main(int argc, char *argv[])
 		red = read(from, buffer, 1024);
 		to = open(argv[2], O_WRONLY | O_APPEND);
 
-	} while (r > 0);
+	} while (red > 0);
 
 	free(buffer);
 	close_file(from);
