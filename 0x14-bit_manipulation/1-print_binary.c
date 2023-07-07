@@ -9,19 +9,22 @@
  */
 void print_binary(unsigned long int n)
 {
-	if (n == 0)
+	int i;
+	int count = 0;
+	unsigned long int pre;
+
+	for (i = 63; i >= 0; i--)
 	{
+		pre = n >> i;
+
+		if (pre & 1)
+		{
+			_putchar('1');
+			count++;
+		}
+		else if (count)
+			_putchar('0');
+	}
+	if (!count)
 		_putchar('0');
-		return;
-	}
-
-	else if (n == 1)
-	{
-		_putchar('1');
-		return;
-	}
-
-	print_binary(n >> 1);
-	_putchar((n & 1) + '0');
-
 }
