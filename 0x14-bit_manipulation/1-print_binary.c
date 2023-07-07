@@ -1,5 +1,5 @@
 #include "main.h"
-
+#include <limits.h>
 
 /**
  * print_binary - A function that prints the binary representation of a number
@@ -9,22 +9,22 @@
  */
 void print_binary(unsigned long int n)
 {
-	int i;
-	int count = 0;
-	unsigned long int pre;
+	char cou = '0';
+	unsigned long int pre = 1ul << 63;
 
-	for (i = 63; i >= 0; i--)
+	while (!(pre & n) && pre != 0)
+		pre = pre >> 1;
+
+	if (pre == 0)
+		write(1, &cou, 1);
+
+	while (pre)
 	{
-		pre = n >> i;
-
-		if (pre & 1)
-		{
-			_putchar('1');
-			count++;
-		}
-		else if (count)
-			_putchar('0');
+		if (pre & n)
+			cou = '1';
+		else
+			cou = '0';
+		write(1, &cou, 1);
+		pre = pre >> 1;
 	}
-	if (!count)
-		_putchar('0');
 }
